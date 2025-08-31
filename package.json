@@ -3,15 +3,23 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "test": "npm run cy:run",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "cy:run": "cypress run -b chrome"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "commonjs",
   "description": "",
   "devDependencies": {
     "concurrently": "^9.2.1",
     "cypress": "^15.0.0"
+  },
+  "dependencies": {
+    "cy": "^0.0.1",
+    "open": "^10.2.0",
+    "wait-on": "^8.0.4"
   }
 }
