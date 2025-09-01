@@ -28,14 +28,7 @@
 // Custom commands for Sweet Shop testing
 // ***********************************************
 
-// Command to open mobile navigation if needed
-Cypress.Commands.add('openMobileNav', () => {
-  cy.get('body').then($body => {
-    if ($body.find('.navbar-toggler:visible').length > 0) {
-      cy.get('.navbar-toggler').click()
-    }
-  })
-})
+
 
 // Command to navigate to specific page
 Cypress.Commands.add('navigateToPage', (pageName) => {

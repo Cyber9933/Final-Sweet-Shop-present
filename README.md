@@ -9,7 +9,6 @@ Sweet Shop is an e-commerce website dedicated to selling retro sweets and candie
 - Learn Cypress E2E testing principles
 - Automate web application testing
 - Ensure website functionality quality
-- Verify cross-browser compatibility
 - Evaluate performance and accessibility aspects
 
 ## 🛍️ Target Website
@@ -20,7 +19,7 @@ Sweet Shop is an e-commerce website dedicated to selling retro sweets and candie
 - Candy Chocolate Cups (£1.00)
 - Rainbow Dust Straws (£0.75) 
 - UFO's Sherbert Filled Flying Saucers (£0.95)
-- Pink Strawberry Bonbons
+- Pink Strawberry Bonbons (£1.00)
 
 ## 📋 Test Coverage
 
@@ -49,27 +48,17 @@ Sweet Shop is an e-commerce website dedicated to selling retro sweets and candie
 - Interactive elements testing
 - Error handling
 
-### ⚡ Performance Tests
-- Page loading speed measurement
-- Console error checking
-- Resource loading verification
-
 
 ## 🚀 Installation & Setup
 
 ### Requirements
-- Node.js (v14 or newer)
+- Node.js v22
 - npm 
 
 ### Installation Steps
 
-1. **Clone the project**
-```bash
-git clone <repository-url>
-cd sweetshop-cypress-tests
-```
+1. **Install dependencies**
 
-2. **Install dependencies**
 ```bash
 npm install
 ```
@@ -81,25 +70,35 @@ npm install cypress --save-dev
 
 4. **Create Cypress folder structure**
 ```
-├── cypress/
-│   ├── e2e/
-│   │   ├── TS01-page-loading.cy.js
-│   │   ├── TS02-navigation-menu.cy.js
-│   │   ├── TS03-sweets-page.cy.js
-│   │   ├── TS04-about-page.cy.js
-│   │   ├── TS05-shopping-basket.cy.js
-│   │   ├── TS06-login-page.cy.js
-│   │   └── TS07-checkout-process.cy.js
-│   └── support/
-│       ├── e2e.js
-│       └── commands.js
-├── .github/
-│   └── workflows/
-│       └── cypress-tests.yml
-├── cypress.config.js
-├── package.json
-└── README.md
+cypress/
+├── e2e/
+│   ├── TS01-page-loading.cy.js
+│   ├── TS02-navigation-menu.cy.js  
+│   ├── TS03-sweets-page.cy.js
+│   ├── TS04-about-page.cy.js
+│   ├── TS05-shopping-basket.cy.js
+│   ├── TS06-login-page.cy.js
+│   └── TS07-checkout-process.cy.js
+├── support/
+│   ├── e2e.js
+│   └── commands.js
+└── .github/
+    └── workflows/
+        └── cypress-tests.yml
+
 ```
+## 📊 **Test Scenarios Coverage**
+
+| Test Suite | Test Cases | Status |
+|------------|------------|--------|
+| **TS01: Page Loading** | 1 TC | ✅ Complete |
+| **TS02: Navigation Menu** | 18 TC | ✅ Complete |
+| **TS03: Sweets Page** | 3 TC | ✅ Complete |
+| **TS04: About Page** | 3 TC | ✅ Complete |
+| **TS05: Shopping Basket** | 4 TC | ✅ Complete |
+| **TS06: Login Page** | 4 TC | ✅ Complete |
+| **TS07: Checkout Process** | 3 TC | ✅ Complete |
+
 
 ## 🏃‍♂️ Running Tests
 
@@ -115,19 +114,29 @@ npx cypress run
 
 ### Run Specific Test
 ```bash
-npx cypress run --spec "cypress/e2e/sweetshop.cy.js"
+npx cypress run --spec "cypress/e2e/TS01_page_loading.cy.js"
+npx cypress run --spec "cypress/e2e/TS02_navigation_menu.cy.js"
+npx cypress run --spec "cypress/e2e/TS03_sweets_page.cy.js"
+npx cypress run --spec "cypress/e2e/TS04_about_page.cy.js"
+npx cypress run --spec "cypress/e2e/TS05_shopping_basket.cy.js"
+npx cypress run --spec "cypress/e2e/TS06_login_page.cy.js"
+npx cypress run --spec "cypress/e2e/TS07_checkout_process.cy.js"
 ```
 
-### Different Browsers
+## 🛠️ **GitHub Actions Integration**
+
+Tests automatically run on:
+- Push to main branch
+- Pull requests
+- Scheduled runs (daily)
+
+Configuration: `.github/workflows/cypress-tests.yml`
+
+### Browsers
 ```bash
 # Chrome
 npx cypress run --browser chrome
 
-# Firefox
-npx cypress run --browser firefox
-
-# Edge
-npx cypress run --browser edge
 ```
 
 ## 📊 Test Scenarios
@@ -154,40 +163,13 @@ npx cypress run --browser edge
 ✅ Mobile responsiveness
 ```
 
-## 📱 Viewport Testing
-
-Tested devices:
-- **Desktop**: 1280x720
-- **Tablet**: 768x1024  
-- **Mobile**: 375x667 (iPhone X)
-- **Custom viewports**
-
-## 🛠️ Custom Commands
-
-Created convenience commands:
-
-```javascript
-// Add item to cart
-cy.addToCartIfExists('Candy Chocolate Cups');
-
-// Check price
-cy.checkPrice('£1.00');
-
-// Search product
-cy.searchProduct('chocolate');
-```
 
 ## 📈 Test Reports
 
-### HTML Reports
-```bash
-npm install --save-dev cypress-mochawesome-reporter
-npx cypress run --reporter cypress-mochawesome-reporter
-```
 
-### Screenshots and Video
+### Screenshots
 - Automatically generated on failures
-- Saved to `cypress/screenshots/` and `cypress/videos/`
+- Saved to `cypress/screenshots/` 
 
 ## 🔧 Configuration
 
@@ -218,8 +200,6 @@ DEBUG=cypress:* npx cypress run
 
 ### Browser Developer Tools
 - Cypress Test Runner automatically opens dev tools
-- Can use `cy.debug()` and `cy.pause()`
-
 
 
 ## 🚦 CI/CD Integration
@@ -227,32 +207,47 @@ DEBUG=cypress:* npx cypress run
 ### GitHub Actions
 ```yaml
 name: Cypress Tests
-on: [push, pull_request]
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Cypress run
-        uses: cypress-io/github-action@v5
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v2
+
         with:
-          start: npm start
-          wait-on: 'http://localhost:3000'
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Cypress tests with Chrome
+        run: npm run cy:run
+
+        env:
+          CI: true
+
+        continue-on-error: true
 ```
 
 ## 📊 Results Analysis
 
 ### Successful Test Criteria
 - ✅ All tests pass (100% pass rate)
-- ✅ Page loading < 5s
+- ✅ Page loading < 4s
 - ✅ No console errors
-- ✅ Mobile responsive works
 
-### Possible Issues
-- Network timeouts
-- Element selector changes
-- Performance bottlenecks
 
 ## 🤝 Contribution Guidelines
 
@@ -267,32 +262,15 @@ jobs:
 - [Cypress Documentation](https://docs.cypress.io/)
 - [Sweet Shop Website](https://sweetshop.netlify.app/)
 - [E2E Testing Best Practices](https://docs.cypress.io/guides/references/best-practices)
-- [Cypress Examples](https://github.com/cypress-io/cypress-example-kitchensink)
 
-## 🏆 Final Thesis Criteria
-
-### Demonstrated Aspects:
-- [x] Understanding of E2E testing process
-- [x] Cypress framework usage
-- [x] Test scenarios creation
-- [x] Automated testing pipeline
-- [x] Performance and accessibility testing
-- [x] Cross-browser testing
-- [x] Mobile responsive testing
-- [x] Test reporting and documentation
-
-### Project Evaluation:
-- **Functionality:** 25%
-- **Test Quality:** 25% 
-- **Documentation:** 20%
-- **Performance:** 15%
-- **Accessibility:** 15%
 
 ## 📞 Contact
 
-**Project Author:** [Lina Panavaitė]  
-**Email:** [linate.pa@gmail.com]  
-**GitHub:** [github.com/Cyber9933]  
+**Project Author:** Lina Panavaitė
+
+**Email:** linate.pa@gmail.com
+
+**GitHub:** github.com/Cyber9933
 
 ---
 
