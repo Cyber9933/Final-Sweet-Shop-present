@@ -6,7 +6,7 @@
     "test": "npm run cy:run",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "cy:run": "cypress run -b chrome"
+    "cy:run": "cypress run --headless -b chrome"
   },
   "keywords": [],
   "author": "",
