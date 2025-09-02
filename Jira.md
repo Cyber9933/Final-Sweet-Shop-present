@@ -27,7 +27,7 @@ Clicking on the task
 - Development option (e.g. create branch/commit)
 - Due date (e.g. Sep. 1, 2025)
 - Sprint assignment (e.g. SSF Sprint 1)
-![Jira_backlog](image.png)
+![Jira_backlog](/cypress/screenshots/Jira_backlog.png)
 
 
 ## 3. Sprint Workflow
@@ -41,7 +41,7 @@ Clicking on the task
 
 ## Sprint Example:
 
-![Jira_board](image-1.png)
+![Jira_board](/cypress/screenshots/Jira_board.png)
 
 ## 4. Complection Tracking
 
@@ -49,7 +49,7 @@ Clicking on the task
 - The board visually reflects real-time progress
 - Sprint can be completed once all task are moved to Done
   
-  ![Jira_completed](image-2.png)
+  ![Jira_completed](/cypress/screenshots/Jira_completed.png)
 
 
 ## 5. Best Practices
