@@ -22,9 +22,7 @@ Each test case includes:
 Clicking on the task
 
 - A detailed test cas description
-- Assignee field (can be assigned manually)
-- Reporte information
-- Development option (e.g. create branch/commit)
+- Assignee field (can be assigned automaticaly)
 - Due date (e.g. Sep. 1, 2025)
 - Sprint assignment (e.g. SSF Sprint 1)
 ![Jira_backlog](/img/Jira_backlog.png)
